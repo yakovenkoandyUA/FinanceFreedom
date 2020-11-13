@@ -1,7 +1,7 @@
 {
-	"name": "webpacktemplate",
+	"name": "namaste",
 	"version": "1.0.0",
-	"description": "My template",
+	"description": "calculate finance",
 	"main": "index.js",
 	"scripts": {
 		"dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
@@ -19,15 +19,6 @@
 	"bugs": {
 		"url": "https://github.com/vedees/webpack-template/issues"
 	},
-	"keywords": [
-		"webpack",
-		"webpack4",
-		"merge",
-		"bable",
-		"bable7",
-		"scss",
-		"vue"
-	],
 	"license": "MIT",
 	"dependencies": {},
 	"devDependencies": {
