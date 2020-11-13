@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg">
+  <img width="200" height="200" src="./src/assets/img/logotype.jpg">
   <h1>Namaste</h1>
 </div>
 
