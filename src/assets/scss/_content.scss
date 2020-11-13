@@ -1,0 +1,49 @@
+main {
+	& section {
+		max-width: 1200px;
+		margin: 50px auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 500px;
+	}
+}
+
+.form-calc {
+	display: flex;
+	flex-direction: column;
+	& label {
+		& input {
+			margin-left: 20px;
+			margin-top: 5px;
+			width: 100px;
+		}
+	}
+}
+
+.graphic {
+	min-width: 40%;
+	height: 100%;
+	&__image {
+		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
+		display: flex;
+		justify-content: center;
+		// align-items: center;
+		min-height: 100%;
+		background-image: url('../img/main-bgi.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+	}
+}
+
+.chart-container {
+	border-radius: 10px;
+	background-image: url('../img/logotype.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	width: 700px;
+	height: 400px;
+}
