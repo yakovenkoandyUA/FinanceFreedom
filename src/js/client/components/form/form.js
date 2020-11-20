@@ -1,10 +1,10 @@
 import { Component } from '../component.js';
 
 export default class Form extends Component {
-	handleSubmit = e => {
-		e.preventDefault();
-		return this.serialize;
-	};
+	// handleSubmit = e => {
+	// 	e.preventDefault();
+	// 	return this.serialize;
+	// };
 	render() {
 		const { ...attr } = this.props;
 		const form = this.createElement('form', attr);
@@ -13,11 +13,10 @@ export default class Form extends Component {
 		return this.form;
 	}
 
-	serialize() {
-		const fields = Array.from(
-			this.form.querySelectorAll('input[name], select[name], textarea[name]')
-		);
-		const body = fields.map(item => `${item.name}=${item.value}`).join('&');
-		return body;
-	}
+	// serialize() {
+	// 	const [...fields] = this.form.querySelectorAll('input[name]');
+
+	// 	const body = fields.map(item => `${item.name}=${item.value}`).join('&');
+	// 	return body;
+	// }
 }

@@ -20,7 +20,9 @@
 		"url": "https://github.com/vedees/webpack-template/issues"
 	},
 	"license": "MIT",
-	"dependencies": {},
+	"dependencies": {
+		"chart.js": "^2.9.4"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.10.5",
 		"@babel/plugin-proposal-class-properties": "^7.12.1",
