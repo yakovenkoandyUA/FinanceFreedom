@@ -10,10 +10,10 @@ export default class Input extends Component {
 	handleBlurSerialize = () => {
 		const [...form] = document.querySelectorAll('input[name]');
 		const formFields = form.reduce((acc, { name, value }) => ({ ...acc, [name]: value }), {});
-		this.laungChart(formFields);
+		this.generateChart(formFields);
 	};
 
-	laungChart(fields) {
+	generateChart(fields) {
 		const generateFields = new calcFilds(fields);
 		generateFields.setNeedInYear();
 		generateFields.setQuantityAccum();
@@ -30,7 +30,7 @@ export default class Input extends Component {
 		const element = this.createElement('input', attr);
 		if (attr.required) {
 			element.addEventListener('focus', this.handleFocus);
-			element.addEventListener('blur', this.handleBlurSerialize);
+			element.addEventListener('change', this.handleBlurSerialize);
 		}
 		let labelElem;
 		if (labelText) {

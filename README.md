@@ -1,8 +1,3 @@
-<div align="center">
-  <img width="400" height="400" src="./src/assets/img/logotype.jpg">
-  <h1>Namaste</h1>
-</div>
-
 ## Build Setup:
 
 ```bash

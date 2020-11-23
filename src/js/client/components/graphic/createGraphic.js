@@ -4,12 +4,19 @@ let ctx = document.getElementById('myChart');
 
 export default class Graphic {
 	createLabelGraph() {
-		const { startCreateCapital, pension, summ } = this.props;
+		const { startCreateCapital, pension } = this.props;
 		if (!(startCreateCapital !== '' && pension !== '')) return;
 		this.label = [];
-		if (summ && this.pensionArr) {
-			let count = +pension + this.pensionArr.length;
-			for (let i = +pension; i <= count; i++) {
+		// debugger;
+		let filterPension = this.pensionArr.filter(item => item);
+		console.log(
+			'🚀 ~ file: createGraphic.js ~ line 12 ~ Graphic ~ createLabelGraph ~ filterPension',
+			filterPension
+		);
+
+		if (this.sum && this.pensionArr) {
+			let count = +pension + filterPension.length;
+			for (let i = startCreateCapital; i <= count; i++) {
 				this.label.push(+i);
 			}
 		} else {
@@ -54,6 +61,9 @@ export default class Graphic {
 				],
 			},
 			options: {
+				tooltips: {
+					enabled: false,
+				},
 				title: {
 					display: true,
 					text: 'Custom Chart Title',
@@ -75,15 +85,14 @@ export default class Graphic {
 						ctx.textBaseline = 'bottom';
 
 						this.data.datasets.forEach(function (dataset) {
+							if (dataset._meta[Object.keys(dataset._meta)[0]].hidden) return;
+
 							for (var i = 0; i < dataset.data.length; i++) {
 								var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
 									scale_max =
 										dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
 								ctx.fillStyle = 'darkorange';
 								var y_pos = model.y - 10;
-								// Make sure data value does not get overflown and hidden
-								// when the bar value is too close to max value of scale
-								// Note: The y value is reverse, it counts from top down
 								if ((scale_max - model.y) / scale_max >= 0.93) y_pos = model.y + 20;
 								ctx.fillText(dataset.data[i], model.x, y_pos);
 							}
@@ -100,7 +109,7 @@ export default class Graphic {
 					yAxes: [
 						{
 							ticks: {
-								fontColor: '#62E200',
+								fontColor: '#f1bb01',
 								fontSize: 14,
 								beginAtZero: false,
 							},

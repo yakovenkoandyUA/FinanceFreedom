@@ -1,7 +1,7 @@
 import { CalculateForm } from './client/components/form/calculateForm.js';
 import Graphic from './client/components/graphic/createGraphic.js';
 
-const form = new CalculateForm({ className: 'form-calc' }).render();
+const form = new CalculateForm({ className: 'form-calc', autocomplete: 'off' }).render();
 const graphic = new Graphic();
 
 window.addEventListener('DOMContentLoaded', () => {

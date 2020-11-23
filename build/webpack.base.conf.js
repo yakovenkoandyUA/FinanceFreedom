@@ -12,6 +12,7 @@ const PATHS = {
 	src: path.join(__dirname, '../src'),
 	dist: path.join(__dirname, '../dist'),
 	assets: 'assets/',
+	static: 'static/',
 };
 
 // Pages const for HtmlWebpackPlugin
@@ -123,7 +124,7 @@ module.exports = {
 				// Static (copy to '/'):
 				{
 					from: `${PATHS.src}/static`,
-					to: '',
+					to: `${PATHS.static}`,
 				},
 			],
 		}),

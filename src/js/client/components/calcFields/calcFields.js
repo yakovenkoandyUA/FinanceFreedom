@@ -4,7 +4,6 @@ export default class calcFields extends Graphic {
 	constructor(props) {
 		super(props);
 		this.props = props;
-
 		this.sum = 0;
 	}
 
@@ -47,8 +46,10 @@ export default class calcFields extends Graphic {
 		const { desiredIncome, inflation } = this.props;
 		if (!(desiredIncome !== '' && this.quantityYear !== undefined)) return;
 		let percent = this.splitPercent(inflation);
-		const value = (desiredIncome * Math.pow(1 + percent, this.quantityYear)).toFixed(0);
-		this.assignValues('desiredIncomeInflation', value);
+		this.desiredIncomeInflation = (
+			desiredIncome * Math.pow(1 + percent, this.quantityYear)
+		).toFixed(0);
+		this.assignValues('desiredIncomeInflation', this.desiredIncomeInflation);
 	}
 
 	setNeedInYear() {
@@ -66,42 +67,56 @@ export default class calcFields extends Graphic {
 		let qtyMonth = this.quantityYear * 12 - 2;
 		let result = start;
 		const percent = this.splitPercent(this.fixValue);
-		this.summInYear = [start];
+		this.summInYear = [];
 		for (let i = 0; i <= qtyMonth; i++) {
-			if (i % 12 === 0) {
-				this.summInYear.push(result);
-			}
 			let counter = Math.floor(+result * (1 + percent) + +addMonth);
 			result = counter;
+			if (i % 12 === 0 || i === qtyMonth) {
+				this.summInYear.push(result);
+			}
 		}
+		console.log(this.summInYear);
 		this.assignValues('summ', result);
 		this.sum = result;
 	}
 
 	getPension() {
-		const { hardPercentInPension, desiredIncomeInflation } = this.props;
+		const { hardPercentInPension } = this.props;
+		// debugger;
 		if (
 			!(
 				this.sum !== '' &&
 				hardPercentInPension !== '' &&
-				desiredIncomeInflation !== '' &&
+				this.desiredIncomeInflation !== '' &&
 				this.quantityYear !== undefined
 			)
 		)
 			return;
 
 		let percent = this.splitPercent(hardPercentInPension);
-		let pensionMoney = [];
+		let pensionMoney = [this.sum];
 		const emptyArr = new Array(this.quantityYear);
+		// debugger;
 		const calcPension = money => {
+			// debugger;
 			let balanceIncome = Math.floor(+money * percent);
-			let pensionInYear = +desiredIncomeInflation * 12;
+			let pensionInYear = +this.desiredIncomeInflation * 12;
 			let balance = +money + balanceIncome - pensionInYear;
 			if (balance <= 0) {
+				pensionMoney.push(0);
 				return;
 			} else {
-				pensionMoney.push(balance);
-				calcPension(balance);
+				if (balanceIncome > pensionInYear) {
+					for (let i = 0; i <= 5; i++) {
+						balanceIncome = Math.floor(+balance * percent);
+						pensionInYear = +this.desiredIncomeInflation * 12;
+						balance = +balance + balanceIncome - pensionInYear;
+						pensionMoney.push(balance);
+					}
+				} else {
+					pensionMoney.push(balance);
+					calcPension(balance);
+				}
 			}
 		};
 		calcPension(this.sum);
