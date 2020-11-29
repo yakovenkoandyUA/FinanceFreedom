@@ -1,13 +1,17 @@
 import { Component } from './component.js';
 import calcFilds from './calcFields/calcFields.js';
 export default class Input extends Component {
-	handleFocus = () => {
-		if (this.error) {
-			this.error.remove();
+	handleFocus = ({ target }) => target.parentElement.classList.toggle('active');
+	handleBlur = ({ target }) => {
+		if (target.value) {
+			target.parentElement.children[0].style.opacity = '0';
+		} else {
+			target.parentElement.children[0].style.opacity = '1';
 		}
+		target.parentElement.classList.toggle('active');
 	};
 
-	handleBlurSerialize = () => {
+	handleChangeSerialize = () => {
 		const [...form] = document.querySelectorAll('input[name]');
 		const formFields = form.reduce((acc, { name, value }) => ({ ...acc, [name]: value }), {});
 		this.generateChart(formFields);
@@ -15,7 +19,6 @@ export default class Input extends Component {
 
 	generateChart(fields) {
 		const generateFields = new calcFilds(fields);
-		generateFields.setNeedInYear();
 		generateFields.setQuantityAccum();
 		generateFields.setDesiredIncomeInflation();
 		generateFields.setPercentMonth();
@@ -30,7 +33,8 @@ export default class Input extends Component {
 		const element = this.createElement('input', attr);
 		if (attr.required) {
 			element.addEventListener('focus', this.handleFocus);
-			element.addEventListener('change', this.handleBlurSerialize);
+			element.addEventListener('blur', this.handleBlur);
+			element.addEventListener('change', this.handleChangeSerialize);
 		}
 		let labelElem;
 		if (labelText) {

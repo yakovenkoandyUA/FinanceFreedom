@@ -52,13 +52,6 @@ export default class calcFields extends Graphic {
 		this.assignValues('desiredIncomeInflation', this.desiredIncomeInflation);
 	}
 
-	setNeedInYear() {
-		const { desiredIncome } = this.props;
-		if (!(desiredIncome !== '')) return;
-		let value = desiredIncome * 12;
-		this.assignValues('needInYear', value);
-	}
-
 	getSumm() {
 		const { contribution, addMonth, pension, hardPercentInYear } = this.props;
 		if (!(contribution !== '' && addMonth !== '' && pension !== '' && hardPercentInYear !== ''))
@@ -75,19 +68,17 @@ export default class calcFields extends Graphic {
 				this.summInYear.push(result);
 			}
 		}
-		console.log(this.summInYear);
 		this.assignValues('summ', result);
 		this.sum = result;
 	}
 
 	getPension() {
 		const { hardPercentInPension } = this.props;
-		// debugger;
 		if (
 			!(
 				this.sum !== '' &&
 				hardPercentInPension !== '' &&
-				this.desiredIncomeInflation !== '' &&
+				this.desiredIncomeInflation !== undefined &&
 				this.quantityYear !== undefined
 			)
 		)
@@ -96,9 +87,7 @@ export default class calcFields extends Graphic {
 		let percent = this.splitPercent(hardPercentInPension);
 		let pensionMoney = [this.sum];
 		const emptyArr = new Array(this.quantityYear);
-		// debugger;
 		const calcPension = money => {
-			// debugger;
 			let balanceIncome = Math.floor(+money * percent);
 			let pensionInYear = +this.desiredIncomeInflation * 12;
 			let balance = +money + balanceIncome - pensionInYear;
@@ -107,7 +96,7 @@ export default class calcFields extends Graphic {
 				return;
 			} else {
 				if (balanceIncome > pensionInYear) {
-					for (let i = 0; i <= 5; i++) {
+					for (let i = 0; i <= 13; i++) {
 						balanceIncome = Math.floor(+balance * percent);
 						pensionInYear = +this.desiredIncomeInflation * 12;
 						balance = +balance + balanceIncome - pensionInYear;

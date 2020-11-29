@@ -10,6 +10,7 @@ html {
 	font-size: $mainFontSize;
 	color: $mainFontColor;
 	height: 100%;
+	scroll-behavior: smooth;
 	@media screen and (max-width: $desktopWidth) {
 		font-size: 16px;
 	}
@@ -24,7 +25,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	font-family: $mainFont;
+	font-family: 'HelveticaNeueLight', 'Montserrat' sans-serif;
 	font-size: $mainFontSize;
 	font-weight: $mainFontWeight;
 	-webkit-font-smoothing: antialiased;
@@ -42,17 +43,5 @@ body {
 	}
 	@media screen and (max-width: $phoneWidth) {
 		max-width: $smPhoneWidth;
-	}
-}
-
-h1 {
-	font-size: rem(20, 10);
-}
-
-.foo {
-	@include placeholder {
-		font-family: $mainFont;
-		font-size: rem(20, 10);
-		color: red;
 	}
 }

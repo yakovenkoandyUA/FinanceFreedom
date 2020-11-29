@@ -1,10 +1,20 @@
 import { CalculateForm } from './client/components/form/calculateForm.js';
 import Graphic from './client/components/graphic/createGraphic.js';
 
-const form = new CalculateForm({ className: 'form-calc', autocomplete: 'off' }).render();
+const formStorage = new CalculateForm({
+	className: 'form-calc',
+	autocomplete: 'off',
+	id: 'storage',
+}).render();
+const formPension = new CalculateForm({
+	className: 'form-calc',
+	autocomplete: 'off',
+	id: 'pension',
+}).render();
 const graphic = new Graphic();
 
 window.addEventListener('DOMContentLoaded', () => {
-	document.querySelector('#root').append(form);
+	document.querySelector('.title-s').after(formStorage);
+	document.querySelector('.title-p').after(formPension);
 	graphic.render();
 });

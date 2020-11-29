@@ -2,15 +2,14 @@
   ========================================================================== */
 
 // Source: https://github.com/survivejs/webpack-merge
-const { merge } = require('webpack-merge')
+const { merge } = require('webpack-merge');
 // Base config
-const baseWebpackConfig = require('./webpack.base.conf')
+const baseWebpackConfig = require('./webpack.base.conf');
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
-  mode: 'production',
-  plugins: []
-})
+	mode: 'production',
+});
 
 module.exports = new Promise((resolve, reject) => {
-  resolve(buildWebpackConfig)
-})
+	resolve(buildWebpackConfig);
+});
