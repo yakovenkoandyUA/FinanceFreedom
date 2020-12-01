@@ -1,5 +1,5 @@
-import { CalculateForm } from './client/components/form/calculateForm.js';
-import Graphic from './client/components/graphic/createGraphic.js';
+import { CalculateForm } from './client/form/calculateForm.js';
+import Graphic from './client/graphic/createGraphic.js';
 
 const formStorage = new CalculateForm({
 	className: 'form-calc',

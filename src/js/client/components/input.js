@@ -1,5 +1,5 @@
 import { Component } from './component.js';
-import calcFilds from './calcFields/calcFields.js';
+import calcFilds from '../calcFields/calcFields.js';
 export default class Input extends Component {
 	handleFocus = ({ target }) => target.parentElement.classList.toggle('active');
 	handleBlur = ({ target }) => {

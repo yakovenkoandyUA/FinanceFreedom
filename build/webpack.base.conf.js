@@ -35,7 +35,7 @@ module.exports = {
       publicPath: '/' - relative path for dist folder (js,css etc)
       publicPath: './' (dot before /) - absolute path for dist folder (js,css etc)
     */
-		publicPath: '/',
+		publicPath: './',
 	},
 	optimization: {
 		splitChunks: {
@@ -59,7 +59,7 @@ module.exports = {
 			},
 			{
 				// Fonts
-				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+				test: /\.(woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
 				loader: 'file-loader',
 				options: {
 					name: '[name].[ext]',
@@ -119,7 +119,7 @@ module.exports = {
 				// Fonts:
 				{
 					from: `${PATHS.src}/${PATHS.assets}fonts`,
-					to: `${PATHS.assets}fonts`,
+					to: `${PATHS.assets}css`,
 				},
 				// Static (copy to '/'):
 				{

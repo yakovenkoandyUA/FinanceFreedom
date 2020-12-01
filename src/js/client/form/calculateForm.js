@@ -1,5 +1,5 @@
-import Input from '../input.js';
-import Form from './form';
+import Input from '../components/input.js';
+import Form from './form.js';
 import { inputForms } from './fields';
 
 export class CalculateForm extends Form {

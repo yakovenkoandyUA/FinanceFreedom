@@ -8,11 +8,15 @@ body {
 main {
 	& section {
 		& #root {
+			// overflow: hidden;
+			// background-image: url(../img/logotype.jpg);
+			// background-repeat: no-repeat;
+			// background-size: contain;
 			background-color: #151517;
 			color: rgb(253, 249, 240);
 			box-shadow: 0px 5px 5px #00000040;
 
-			padding: 20px;
+			padding: rem(10) 0 0;
 			display: flex;
 			justify-content: space-around;
 			text-align: center;
@@ -21,23 +25,17 @@ main {
 }
 
 .logo {
-	position: absolute;
-	width: 50%;
-	right: 0;
-	bottom: 23%;
+	width: 40%;
 }
 .title-s,
 .title-p {
 	color: #d1d5d6;
 	letter-spacing: 1.8px;
 	text-transform: uppercase;
-	margin-bottom: 1em;
 	font-weight: 600;
 	font-size: rem(22);
 }
-.storage {
-	margin-bottom: 0.8em;
-}
+.storage,
 .pension {
 	margin-bottom: 0.8em;
 }
@@ -58,12 +56,12 @@ main {
 	justify-content: center;
 	align-items: center;
 	width: 90%;
-	margin: 50px auto;
+	margin: 0 auto 50px;
 	border-radius: 10px;
 }
 
 .form-calc label {
-	margin: 0.5em;
+	margin-top: 0.5em;
 	display: flex;
 	justify-content: space-between;
 	position: relative;

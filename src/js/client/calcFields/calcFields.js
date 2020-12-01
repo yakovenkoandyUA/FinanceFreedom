@@ -21,7 +21,6 @@ export default class calcFields extends Graphic {
 		const { startCreateCapital, pension } = this.props;
 		if (!(startCreateCapital !== '' && pension !== '')) return;
 		this.quantityYear = pension - startCreateCapital;
-		this.assignValues('quantityAccum', this.quantityYear);
 	}
 
 	setPercentMonth() {
@@ -57,7 +56,7 @@ export default class calcFields extends Graphic {
 		if (!(contribution !== '' && addMonth !== '' && pension !== '' && hardPercentInYear !== ''))
 			return;
 		let start = +contribution + +addMonth;
-		let qtyMonth = this.quantityYear * 12 - 2;
+		let qtyMonth = this.quantityYear * 12;
 		let result = start;
 		const percent = this.splitPercent(this.fixValue);
 		this.summInYear = [];
@@ -68,7 +67,6 @@ export default class calcFields extends Graphic {
 				this.summInYear.push(result);
 			}
 		}
-		this.assignValues('summ', result);
 		this.sum = result;
 	}
 
@@ -83,7 +81,6 @@ export default class calcFields extends Graphic {
 			)
 		)
 			return;
-
 		let percent = this.splitPercent(hardPercentInPension);
 		let pensionMoney = [this.sum];
 		const emptyArr = new Array(this.quantityYear);
@@ -96,7 +93,8 @@ export default class calcFields extends Graphic {
 				return;
 			} else {
 				if (balanceIncome > pensionInYear) {
-					for (let i = 0; i <= 13; i++) {
+					// debugger;
+					for (let i = 0; i <= 10; i++) {
 						balanceIncome = Math.floor(+balance * percent);
 						pensionInYear = +this.desiredIncomeInflation * 12;
 						balance = +balance + balanceIncome - pensionInYear;

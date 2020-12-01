@@ -13,22 +13,17 @@ export default class Graphic {
 		if (this.pensionArr) {
 			filterPension = this.pensionArr.filter(item => item);
 		}
-
 		if (this.sum && this.pensionArr) {
 			let count = +pension + filterPension.length;
-			for (let i = startCreateCapital; i < count; i++) {
+			for (let i = startCreateCapital; i <= count; i++) {
 				this.label.push(+i);
 			}
 		} else {
-			for (let i = startCreateCapital; i < pension; i++) {
+			for (let i = startCreateCapital; i <= pension; i++) {
 				this.label.push(+i);
 			}
 		}
 		this.render();
-		// if (this.label) {
-		// 	let scrollingElement = document.scrollingElement || document.body;
-		// 	scrollingElement.scrollTop = scrollingElement.scrollHeight;
-		// }
 	}
 
 	generatePointColor = (totalAmount, flag = false) =>
@@ -37,6 +32,7 @@ export default class Graphic {
 			: '';
 
 	render() {
+		let years = this.quantityYear;
 		const pointsAcc = this.generatePointColor(this.summInYear, true);
 		const pointsPens = this.generatePointColor(this.pensionArr);
 		myChart.destroy();
@@ -66,7 +62,15 @@ export default class Graphic {
 			},
 			options: {
 				tooltips: {
-					enabled: false,
+					mode: 'nearest',
+					enabled: this.quantityYear > 15 ? true : false,
+					backgroundColor: 'rgb(0,0,0)',
+					titleFontSize: 14,
+					titleFontColor: '#fff',
+					titleAlign: 'center',
+					bodyFontColor: '#fff',
+					bodyFontSize: 14,
+					displayColors: false,
 				},
 				title: {
 					fontSize: 12,
@@ -96,18 +100,25 @@ export default class Graphic {
 						);
 						ctx.textAlign = 'center';
 						ctx.textBaseline = 'bottom';
-
 						this.data.datasets.forEach(function (dataset) {
 							if (dataset._meta[Object.keys(dataset._meta)[0]].hidden) return;
-
 							for (let i = 0; i < dataset.data.length; i++) {
 								let model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
 									scale_max =
 										dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
 								ctx.fillStyle = '#151517';
 								let y_pos = model.y - 10;
-								if ((scale_max - model.y) / scale_max >= 0.93) y_pos = model.y + 20;
-								ctx.fillText(dataset.data[i], model.x, y_pos);
+								dataset._meta[Object.keys(dataset._meta)[0]].data[i]._view.zIndex = -10;
+								console.dir(dataset._meta[Object.keys(dataset._meta)[0]].data[i]);
+								dataset._meta[Object.keys(dataset._meta)[0]].dataset._view.zIndex = -10;
+								if ((scale_max - model.y) / scale_max >= 0.93) y_pos = model.y + 30;
+								if (years > 15) {
+									if (i % 2 === 0) {
+										ctx.fillText(dataset.data[i], model.x, y_pos);
+									}
+								} else {
+									ctx.fillText(dataset.data[i], model.x, y_pos);
+								}
 							}
 						});
 					},
@@ -132,9 +143,6 @@ export default class Graphic {
 					],
 					xAxes: [
 						{
-							scaleLabel: {
-								labelString: 'hello world',
-							},
 							gridLines: {
 								color: '#fff',
 								lineWidth: 1,
