@@ -1,41 +1,46 @@
-import { Chart } from 'chart.js';
-import { options, ctx } from './myChart';
+import { Chart } from 'chart.js'
+import { options, ctx } from './myChart'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 
-let myChart = new Chart(ctx, options);
+let myChart = new Chart(ctx)
 
 export default class Graphic {
 	createLabelGraph() {
-		const { startCreateCapital, pension } = this.props;
-		if (!(startCreateCapital !== '' && pension !== '')) return;
+		const { startCreateCapital, pension, hardPercentInYear } = this.props
+		if (!(startCreateCapital !== '' && pension !== '' && hardPercentInYear !== '')) return
 
-		this.label = [];
-		let filterPension;
+		this.label = []
+		let filterPension
 		if (this.pensionArr) {
-			filterPension = this.pensionArr.filter(item => item);
+			filterPension = this.pensionArr.filter(item => item)
 		}
 		if (this.sum && this.pensionArr) {
-			let count = +pension + filterPension.length;
+			let count = +pension + filterPension.length
 			for (let i = startCreateCapital; i <= count; i++) {
-				this.label.push(+i);
+				this.label.push(+i)
 			}
 		} else {
 			for (let i = startCreateCapital; i <= pension; i++) {
-				this.label.push(+i);
+				this.label.push(+i)
 			}
 		}
-		this.render();
+		if (this.label) {
+			document.querySelector('.chart-container').classList.add('years')
+		}
+		document.querySelector('.chart-container-title').style.display = 'none'
+		this.render()
 	}
 
 	generatePointColor = (totalAmount, flag = false) =>
 		totalAmount
 			? new Array(totalAmount.length).fill(flag ? 'rgba(19, 111, 98, 1)' : 'rgba(222, 145, 81, 1)')
-			: '';
+			: ''
 
 	render() {
-		let years = this.quantityYear;
-		const pointsAcc = this.generatePointColor(this.summInYear, true);
-		const pointsPens = this.generatePointColor(this.pensionArr);
-		myChart.destroy();
+		let years = this.quantityYear
+		const pointsAcc = this.generatePointColor(this.summInYear, true)
+		const pointsPens = this.generatePointColor(this.pensionArr)
+		myChart.destroy()
 		myChart = new Chart(ctx, {
 			type: 'line',
 			data: {
@@ -45,24 +50,50 @@ export default class Graphic {
 					{
 						label: 'Создание капитала',
 						data: this.summInYear,
-						backgroundColor: ['rgba(19, 111, 98, 0.3)'],
-						borderColor: ['rgba(19, 111, 98, 1)'],
+						backgroundColor: ['rgb(12, 146, 0, 0.2)'],
+						borderColor: ['rgb(12, 146, 0, 0.8)'],
 						borderColor: pointsAcc,
 						borderWidth: 1,
 					},
 					{
 						label: 'Выход на пенсию',
 						data: this.pensionArr,
-						backgroundColor: ['rgba(222, 145, 81, 0.4)'],
-						borderColor: ['rgba(222, 145, 81, 1)'],
+						backgroundColor: ['rgb(249, 104, 0, 0.2)'],
+						borderColor: ['rgb(249, 104, 0, 0.8)'],
 						borderColor: pointsPens,
 						borderWidth: 1,
 					},
 				],
 			},
+			plugins: [ChartDataLabels],
 			options: {
+				plugins: {
+					datalabels: {
+						color: '#969696',
+						// labels: {
+						// 	title: {
+						// 		font: {
+						// 			weight: 'bold',
+						// 		},
+						// 	},
+						// },
+						anchor: 'end',
+						align: 'top',
+						offset: 2,
+						display: function (context) {
+							if (window.innerWidth < 768) {
+								return context.dataIndex % 2
+							}
+						},
+						formatter: function (value, context) {
+							return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+						},
+					},
+				},
+				responsive: true,
 				tooltips: {
-					mode: 'nearest',
+					mode: 'point',
+					intersect: false,
 					enabled: this.quantityYear > 15 ? true : false,
 					backgroundColor: 'rgb(0,0,0)',
 					titleFontSize: 14,
@@ -71,6 +102,26 @@ export default class Graphic {
 					bodyFontColor: '#fff',
 					bodyFontSize: 14,
 					displayColors: false,
+					callbacks: {
+						title: function (tooltipItem, data) {
+							return data['labels'][tooltipItem[0]['index']] + ' ' + 'Лет'
+						},
+						label: function (tooltipItem, data) {
+							let arr = [...data['datasets'][0]['data'], ...data['datasets'][1]['data']].filter(
+								i => i,
+							)
+							let index = tooltipItem['index']
+							let indexPension = data['datasets'][0]['data'].length
+							return (
+								'Создание капитала:' +
+								' ' +
+								'$' +
+								arr[index >= indexPension ? index + 1 : index]
+									.toString()
+									.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+							)
+						},
+					},
 				},
 				title: {
 					fontSize: 12,
@@ -80,76 +131,59 @@ export default class Graphic {
 					animationDuration: 0,
 				},
 				legend: {
+					display: false,
 					labels: {
 						fontColor: '#151517',
 						fontSize: 14,
-						padding: 15,
+						boxWidth: 10,
+						usePointStyle: true,
 					},
 					position: 'bottom',
 				},
-
 				animation: {
 					duration: 500,
 					easing: 'easeOutQuart',
-					onComplete: function () {
-						let ctx = this.chart.ctx;
-						ctx.font = Chart.helpers.fontString(
-							Chart.defaults.global.defaultFontFamily,
-							'normal',
-							Chart.defaults.global.defaultFontFamily
-						);
-						ctx.textAlign = 'center';
-						ctx.textBaseline = 'bottom';
-						this.data.datasets.forEach(function (dataset) {
-							if (dataset._meta[Object.keys(dataset._meta)[0]].hidden) return;
-							for (let i = 0; i < dataset.data.length; i++) {
-								let model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-									scale_max =
-										dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
-								ctx.fillStyle = '#151517';
-								let y_pos = model.y - 10;
-								dataset._meta[Object.keys(dataset._meta)[0]].data[i]._view.zIndex = -10;
-								console.dir(dataset._meta[Object.keys(dataset._meta)[0]].data[i]);
-								dataset._meta[Object.keys(dataset._meta)[0]].dataset._view.zIndex = -10;
-								if ((scale_max - model.y) / scale_max >= 0.93) y_pos = model.y + 30;
-								if (years > 15) {
-									if (i % 2 === 0) {
-										ctx.fillText(dataset.data[i], model.x, y_pos);
-									}
-								} else {
-									ctx.fillText(dataset.data[i], model.x, y_pos);
-								}
-							}
-						});
-					},
 				},
 				responsive: true,
 				scales: {
 					yAxes: [
 						{
 							ticks: {
-								fontColor: '#151517',
+								display: this.sum ? true : false,
+								fontColor: '#969696',
 								padding: 8,
 								fontSize: 14,
 								beginAtZero: false,
+								callback: function (value, index, values) {
+									return value.toString().slice(0, 2) + 'k$'
+								},
 								min: this.summInYear ? this.summInYear[0] : 0,
+								z: -1,
 							},
 							gridLines: {
-								color: '#fff',
+								color: 'rgba(255,255,255, 0.3)',
 								lineWidth: 1,
-								borderDash: [20, 5],
+								// borderDash: [20, 5],
+								zeroLineColor: '#fff',
+								// display: false,
+							},
+							labels: {
+								style: {
+									zIndex: 0,
+								},
 							},
 						},
 					],
 					xAxes: [
 						{
 							gridLines: {
-								color: '#fff',
-								lineWidth: 1,
+								// color: 'rgba(255,255,255, 0.3)',
+								// lineWidth: 1,
+								// zeroLineColor: '#fff',
 								display: false,
 							},
 							ticks: {
-								fontColor: '#151517',
+								fontColor: '#969696',
 								padding: 8,
 								fontSize: 14,
 							},
@@ -157,6 +191,6 @@ export default class Graphic {
 					],
 				},
 			},
-		});
+		})
 	}
 }

@@ -11,10 +11,10 @@ const formPension = new CalculateForm({
 	autocomplete: 'off',
 	id: 'pension',
 }).render();
-const graphic = new Graphic();
+// const graphic = new Graphic();
 
 window.addEventListener('DOMContentLoaded', () => {
 	document.querySelector('.title-s').after(formStorage);
 	document.querySelector('.title-p').after(formPension);
-	graphic.render();
+	// graphic.render();
 });

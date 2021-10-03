@@ -8,11 +8,13 @@ export default class calcFields extends Graphic {
 	}
 
 	assignValues = (selector, value) => {
+      
 		let element = document.querySelector(`input[name = ${selector}]`);
 		element.value = value;
 	};
 
 	splitPercent = percent => {
+		
 		let [num] = percent.split('%');
 		return +num / 100;
 	};
@@ -29,22 +31,22 @@ export default class calcFields extends Graphic {
 		if (!(hardPercentInYear !== '')) return;
 		const value = (Math.pow(1 + percent, 1 / 12) - 1) * 100;
 		this.fixValue = value.toFixed(2) + '%';
-		this.assignValues('percentMonth', this.fixValue);
+		// this.assignValues('percentMonth', this.fixValue);
 	}
 
-	setPercentMonthPension() {
-		const { hardPercentInPension } = this.props;
-		let percent = this.splitPercent(hardPercentInPension);
-		if (!(hardPercentInPension !== '')) return;
-		const value = (Math.pow(1 + percent, 1 / 12) - 1) * 100;
-		const fixValue = value.toFixed(2) + '%';
-		this.assignValues('percentMonthPension', fixValue);
-	}
+	// setPercentMonthPension() {
+	// 	const { hardPercentInPension } = this.props;
+	// 	let percent = this.splitPercent(hardPercentInPension);
+	// 	if (!(hardPercentInPension !== '')) return;
+	// 	const value = (Math.pow(1 + percent, 1 / 12) - 1) * 100;
+	// 	const fixValue = value.toFixed(2) + '%';
+	// 	this.assignValues('percentMonthPension', fixValue);
+	// }
 
 	setDesiredIncomeInflation() {
-		const { desiredIncome, inflation } = this.props;
+		const { desiredIncome } = this.props;
 		if (!(desiredIncome !== '' && this.quantityYear !== undefined)) return;
-		let percent = this.splitPercent(inflation);
+		let percent = this.splitPercent('2.5%');
 		this.desiredIncomeInflation = (
 			desiredIncome * Math.pow(1 + percent, this.quantityYear)
 		).toFixed(0);
@@ -93,10 +95,10 @@ export default class calcFields extends Graphic {
 				return;
 			} else {
 				if (balanceIncome > pensionInYear) {
-					// debugger;
 					for (let i = 0; i <= 10; i++) {
 						balanceIncome = Math.floor(+balance * percent);
 						pensionInYear = +this.desiredIncomeInflation * 12;
+						console.log(pensionInYear);
 						balance = +balance + balanceIncome - pensionInYear;
 						pensionMoney.push(balance);
 					}

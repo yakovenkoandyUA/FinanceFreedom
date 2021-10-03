@@ -50,7 +50,8 @@
 	src: url('../fonts/HelveticaLight.woff2') format('woff2');
 }
 
-// @include font-face('Montserrat', '../fonts/Montserrat-400', 400);
+@include font-face('Montserrat', '../fonts/Montserrat-400', 400);
+@include font-face('Didact Gothic', '../fonts/DidactGothic-Regular', 400);
 // @include font-face('Montserrat', '../fonts/Montserrat-600', 600);
 // @include font-face('Montserrat', '../fonts/Montserrat-700', 700);
 // @include font-face('Montserrat', '../fonts/Montserrat-900', 900);

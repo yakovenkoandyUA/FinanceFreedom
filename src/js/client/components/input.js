@@ -4,7 +4,7 @@ export default class Input extends Component {
 	handleFocus = ({ target }) => target.parentElement.classList.toggle('active');
 	handleBlur = ({ target }) => {
 		if (target.value) {
-			target.parentElement.children[0].style.opacity = '0';
+			// target.parentElement.children[0].style.opacity = '0';
 		} else {
 			target.parentElement.children[0].style.opacity = '1';
 		}
@@ -22,7 +22,7 @@ export default class Input extends Component {
 		generateFields.setQuantityAccum();
 		generateFields.setDesiredIncomeInflation();
 		generateFields.setPercentMonth();
-		generateFields.setPercentMonthPension();
+		// generateFields.setPercentMonthPension();
 		generateFields.getSumm();
 		generateFields.getPension();
 		generateFields.createLabelGraph();
