@@ -1,36 +1,34 @@
-import Graphic from '../graphic/createGraphic';
+import Graphic from '../graphic/createGraphic'
 
 export default class calcFields extends Graphic {
 	constructor(props) {
-		super(props);
-		this.props = props;
-		this.sum = 0;
+		super(props)
+		this.props = props
+		this.sum = 0
 	}
 
 	assignValues = (selector, value) => {
-      
-		let element = document.querySelector(`input[name = ${selector}]`);
-		element.value = value;
-	};
+		let element = document.querySelector(`input[name = ${selector}]`)
+		element.value = value
+	}
 
 	splitPercent = percent => {
-		
-		let [num] = percent.split('%');
-		return +num / 100;
-	};
+		let [num] = percent.split('%')
+		return +num / 100
+	}
 
 	setQuantityAccum() {
-		const { startCreateCapital, pension } = this.props;
-		if (!(startCreateCapital !== '' && pension !== '')) return;
-		this.quantityYear = pension - startCreateCapital;
+		const { startCreateCapital, pension } = this.props
+		if (!(startCreateCapital !== '' && pension !== '')) return
+		this.quantityYear = pension - startCreateCapital
 	}
 
 	setPercentMonth() {
-		const { hardPercentInYear } = this.props;
-		let percent = this.splitPercent(hardPercentInYear);
-		if (!(hardPercentInYear !== '')) return;
-		const value = (Math.pow(1 + percent, 1 / 12) - 1) * 100;
-		this.fixValue = value.toFixed(2) + '%';
+		const { hardPercentInYear } = this.props
+		let percent = this.splitPercent(hardPercentInYear)
+		if (!(hardPercentInYear !== '')) return
+		const value = (Math.pow(1 + percent, 1 / 12) - 1) * 100
+		this.fixValue = value.toFixed(2) + '%'
 		// this.assignValues('percentMonth', this.fixValue);
 	}
 
@@ -44,36 +42,37 @@ export default class calcFields extends Graphic {
 	// }
 
 	setDesiredIncomeInflation() {
-		const { desiredIncome } = this.props;
-		if (!(desiredIncome !== '' && this.quantityYear !== undefined)) return;
-		let percent = this.splitPercent('2.5%');
+		const { desiredIncome } = this.props
+		if (!(desiredIncome !== '' && this.quantityYear !== undefined)) return
+		let percent = this.splitPercent('2.5%')
 		this.desiredIncomeInflation = (
 			desiredIncome * Math.pow(1 + percent, this.quantityYear)
-		).toFixed(0);
-		this.assignValues('desiredIncomeInflation', this.desiredIncomeInflation);
+		).toFixed(0)
+		this.assignValues('desiredIncomeInflation', this.desiredIncomeInflation)
 	}
 
 	getSumm() {
-		const { contribution, addMonth, pension, hardPercentInYear } = this.props;
+		const { contribution, addMonth, pension, hardPercentInYear } = this.props
 		if (!(contribution !== '' && addMonth !== '' && pension !== '' && hardPercentInYear !== ''))
-			return;
-		let start = +contribution + +addMonth;
-		let qtyMonth = this.quantityYear * 12;
-		let result = start;
-		const percent = this.splitPercent(this.fixValue);
-		this.summInYear = [];
+			return
+		let start = +contribution + +addMonth
+		let qtyMonth = this.quantityYear * 12
+		let result = start
+		const percent = this.splitPercent(this.fixValue)
+		this.summInYear = []
 		for (let i = 0; i <= qtyMonth; i++) {
-			let counter = Math.floor(+result * (1 + percent) + +addMonth);
-			result = counter;
+			let counter = Math.floor(+result * (1 + percent) + +addMonth)
+			result = counter
 			if (i % 12 === 0 || i === qtyMonth) {
-				this.summInYear.push(result);
+				this.summInYear.push(result)
 			}
 		}
-		this.sum = result;
+		this.sum = result
 	}
 
 	getPension() {
-		const { hardPercentInPension } = this.props;
+		const { hardPercentInPension, incomeTax } = this.props
+
 		if (
 			!(
 				this.sum !== '' &&
@@ -82,33 +81,34 @@ export default class calcFields extends Graphic {
 				this.quantityYear !== undefined
 			)
 		)
-			return;
-		let percent = this.splitPercent(hardPercentInPension);
-		let pensionMoney = [this.sum];
-		const emptyArr = new Array(this.quantityYear);
+			return
+		let percent = this.splitPercent(hardPercentInPension)
+		let incomeTaxPercent = this.splitPercent(incomeTax)
+		let pensionMoney = [this.sum]
+		const emptyArr = new Array(this.quantityYear)
 		const calcPension = money => {
-			let balanceIncome = Math.floor(+money * percent);
-			let pensionInYear = +this.desiredIncomeInflation * 12;
-			let balance = +money + balanceIncome - pensionInYear;
+			let balanceIncome = Math.floor(+money * percent)
+			let pensionInYear = +this.desiredIncomeInflation * 12
+			let balance = +money + balanceIncome - pensionInYear
 			if (balance <= 0) {
-				pensionMoney.push(0);
-				return;
+				pensionMoney.push(0)
+				return
 			} else {
 				if (balanceIncome > pensionInYear) {
 					for (let i = 0; i <= 10; i++) {
-						balanceIncome = Math.floor(+balance * percent);
-						pensionInYear = +this.desiredIncomeInflation * 12;
-						console.log(pensionInYear);
-						balance = +balance + balanceIncome - pensionInYear;
-						pensionMoney.push(balance);
+						balanceIncome = Math.floor(+balance * percent)
+						pensionInYear = +this.desiredIncomeInflation * 12
+						balance = +balance + balanceIncome - pensionInYear
+                        let diffBalanceTax = balance - balance * incomeTaxPercent
+						pensionMoney.push(diffBalanceTax)
 					}
 				} else {
-					pensionMoney.push(balance);
-					calcPension(balance);
+					pensionMoney.push(balance)
+					calcPension(balance)
 				}
 			}
-		};
-		calcPension(this.sum);
-		this.pensionArr = emptyArr.concat(pensionMoney);
+		}
+		calcPension(this.sum)
+		this.pensionArr = emptyArr.concat(pensionMoney)
 	}
 }

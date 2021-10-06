@@ -11,6 +11,7 @@ body {
 	@media (max-width: 768px) {
 		text-align: left;
 	}
+	text-align: left;
 }
 
 .logo {
@@ -118,8 +119,8 @@ body {
 // }
 
 .form-calc label input:disabled {
-	color: #fff;
-	border: none;
+	color: #f96800;
+	border-color: #f96800;
 }
 
 .star {
@@ -149,6 +150,7 @@ body {
 	&__wrapper {
 		max-width: calc((100% - 1em) / 1.2);
 		margin: 0 auto;
+		text-align: center;
 		@media (max-width: 768px) {
 			text-align: center;
 		}
@@ -161,7 +163,7 @@ body {
 .footer {
 	max-width: calc((100% - 1em) / 1.2);
 	margin: 0 auto;
-
+	padding-bottom: 2em;
 	&__info {
 		display: flex;
 		justify-content: space-between;
@@ -174,7 +176,7 @@ body {
 	&__item {
 		display: flex;
 		align-items: center;
-		min-width: 400px;
+		min-width: 290px;
 		cursor: pointer;
 		@media (max-width: 768px) {
 			margin-bottom: 1.3em;
