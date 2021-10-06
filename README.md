@@ -1,5 +1,11 @@
 ## Build Setup:
 
+#### Programs that are required to install the project:
+
+- [Node.js](https://nodejs.org/uk/)
+- [Git bash](https://git-scm.com/downloads)
+
+
 ```bash
 # Download repository:
 git clone https://github.com/yakovenkoandyUA/FinanceFreedom.git
