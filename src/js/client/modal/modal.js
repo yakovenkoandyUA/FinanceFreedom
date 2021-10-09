@@ -38,7 +38,7 @@ export default class Modal {
             <div class="modal__item">
                 <div class="modal__item-head">
                     <img class="modal__item-img" src="./assets/img/modal/eth.png" alt="monobank" width="32px">
-                    <h3 class="modal__item-title">Etherium (ERC-20):</h3>
+                    <h3 class="modal__item-title">Ethereum (ERC-20):</h3>
                 </div>
                 <p class="modal__item-text">0x0f441519a89af75162600fecf8744d09ac4be798</p>
             </div>

@@ -98,9 +98,10 @@ export default class calcFields extends Graphic {
 					for (let i = 0; i <= 10; i++) {
 						balanceIncome = Math.floor(+balance * percent)
 						pensionInYear = +this.desiredIncomeInflation * 12
-						balance = +balance + balanceIncome - pensionInYear
-                        let diffBalanceTax = balance - balance * incomeTaxPercent
-						pensionMoney.push(diffBalanceTax)
+						balance = +balance + (balanceIncome - balanceIncome * incomeTaxPercent) - pensionInYear
+						// let diffBalanceTax = balance - balance * incomeTaxPercent
+
+						pensionMoney.push(balance)
 					}
 				} else {
 					pensionMoney.push(balance)

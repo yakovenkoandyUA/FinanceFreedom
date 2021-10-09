@@ -29,7 +29,7 @@ body {
 .storage,
 .pension {
 	margin-bottom: 0.8em;
-	max-width: 80px;
+	max-width: 100px;
 	@media (max-width: 768px) {
 		max-width: 100%;
 	}
@@ -69,7 +69,8 @@ body {
 
 .form-calc label input {
 	border: none;
-	font-size: rem(19);
+	letter-spacing: 1.2px;
+	font-size: rem(21);
 	border-bottom: 1px solid $mainFontColor;
 	color: rgb(209, 213, 214);
 	// text-align: center;
@@ -195,9 +196,11 @@ body {
 		&-icon {
 			max-width: 130px;
 			margin-right: 1em;
-			transition: 0.5s;
 			@media (max-width: 768px) {
 				max-width: 90px;
+			}
+			& path {
+				transition: 0.5s;
 			}
 		}
 	}
@@ -229,13 +232,12 @@ body {
 		}
 	}
 }
-
-.footer__item:first-child:hover svg,
-.footer__item:first-child:active svg {
+.footer__item:first-child:hover svg path,
+.footer__item:first-child:active svg path {
 	fill: red;
 }
-.footer__item:nth-child(2):hover svg,
-.footer__item:nth-child(2):active svg {
+.footer__item:nth-child(2):hover svg path,
+.footer__item:nth-child(2):active svg path {
 	fill: #0c9200;
 }
 
@@ -297,7 +299,7 @@ body {
 		align-items: center;
 		margin-bottom: 0.8em;
 	}
-	&-img{
+	&-img {
 		margin-right: 0.5em;
 	}
 	&-title {

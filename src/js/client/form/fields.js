@@ -96,7 +96,7 @@ export const inputForms = [
 	{
 		type: 'text',
 		name: 'incomeTax',
-		className: 'storage',
+		className: 'pension',
 		required: true,
 		labelText: '<p class="form-calc-text">Налог на инвестиционный доход</p>',
 		// disabled: true,

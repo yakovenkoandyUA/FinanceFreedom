@@ -46,3 +46,13 @@ body {
 		max-width: $smPhoneWidth;
 	}
 }
+
+.header {
+	&__title {
+		font-size: rem(28);
+		line-height: rem(42);
+	}
+
+	&__nav {
+	}
+}

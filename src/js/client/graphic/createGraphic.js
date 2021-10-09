@@ -45,7 +45,7 @@ export default class Graphic {
 			type: 'line',
 			data: {
 				labels: this.label,
-				showLine: true,
+				// showLine: true,
 				datasets: [
 					{
 						label: 'Создание капитала',
@@ -149,7 +149,7 @@ export default class Graphic {
 					yAxes: [
 						{
 							ticks: {
-								display: this.sum ? true : false,
+								display:  false,
 								fontColor: '#969696',
 								padding: 8,
 								fontSize: 14,
@@ -161,11 +161,11 @@ export default class Graphic {
 								z: -1,
 							},
 							gridLines: {
+								display: true,
 								color: 'rgba(255,255,255, 0.3)',
 								lineWidth: 1,
 								// borderDash: [20, 5],
-								zeroLineColor: '#fff',
-								// display: false,
+								zeroLineColor: '#000',
 							},
 							labels: {
 								style: {
@@ -177,9 +177,9 @@ export default class Graphic {
 					xAxes: [
 						{
 							gridLines: {
-								// color: 'rgba(255,255,255, 0.3)',
-								// lineWidth: 1,
-								// zeroLineColor: '#fff',
+								color: 'rgba(255,255,255, 0.3)',
+								lineWidth: 1,
+								zeroLineColor: '#fff',
 								display: false,
 							},
 							ticks: {
