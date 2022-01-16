@@ -6,14 +6,23 @@ export const inputForms = [
 		className: 'pension',
 		labelText: '<p class="form-calc-text">Желаемый пассивный доход в месяц в $</p>',
 	},
-	// {
-	// 	type: 'text',
-	// 	name: 'inflation',
-	// 	className: 'pension',
-	// 	labelText: 'Уровень инфляции (для $)',
-	// 	disabled: true,
-	// 	value: '2.5%',
-	// },
+	{
+		type: 'text',
+		name: 'hardPercentInPension',
+		required: true,
+		className: 'pension',
+		labelText: '<p class="form-calc-text">Годовой сложный % после создания капитала</p>',
+	},
+	{
+		type: 'text',
+		name: 'incomeTax',
+		className: 'pension',
+		required: true,
+		labelText: '<p class="form-calc-text">Налог на инвестиционный доход</p>',
+		// disabled: true,
+		// value: 0,
+	},
+
 	{
 		type: 'text',
 		name: 'desiredIncomeInflation',
@@ -25,19 +34,12 @@ export const inputForms = [
 
 	{
 		type: 'text',
-		name: 'hardPercentInPension',
+		name: 'startCreateCapital',
 		required: true,
-		className: 'pension',
-		labelText: '<p class="form-calc-text">Годовой сложный % после создания капитала</p>',
+		className: 'storage',
+		labelText: '<p class="form-calc-text">Возраст начала создания капитала, лет</p> ',
+		// value: 25,
 	},
-	// {
-	// 	type: 'text',
-	// 	name: 'percentMonthPension',
-	// 	className: 'pension',
-	// 	labelText: 'Ежемесячный % после создания капитала, $',
-	// 	disabled: true,
-	// 	value: 0,
-	// },
 	{
 		type: 'text',
 		name: 'contribution',
@@ -46,6 +48,7 @@ export const inputForms = [
 		labelText: '<p class="form-calc-text">Первоначальная инвестиция в $</p>',
 		// value: 1000,
 	},
+
 	{
 		type: 'text',
 		name: 'addMonth',
@@ -56,20 +59,34 @@ export const inputForms = [
 	},
 	{
 		type: 'text',
-		name: 'startCreateCapital',
+		name: 'hardPercentInYear',
 		required: true,
 		className: 'storage',
-		labelText: '<p class="form-calc-text">Возраст начала создания капитала, лет</p> ',
-		// value: 25,
+		labelText: '<p class="form-calc-text">Годовой сложный % в период создания капитала</p>',
 	},
 	{
 		type: 'text',
 		name: 'pension',
 		required: true,
 		className: 'storage',
-		labelText: '<p class="form-calc-text">Возраст завершения создания капитала, лет</p>',
-		// value: 50,
+		labelText: '<p class="form-calc-text">Выход на пенсию, лет</p>',
 	},
+	// {
+	// 	type: 'text',
+	// 	name: 'percentMonthPension',
+	// 	className: 'pension',
+	// 	labelText: 'Ежемесячный % после создания капитала, $',
+	// 	disabled: true,
+	// 	value: 0,
+	// },
+	// {
+	// 	type: 'text',
+	// 	name: 'inflation',
+	// 	className: 'pension',
+	// 	labelText: 'Уровень инфляции (для $)',
+	// 	disabled: true,
+	// 	value: '2.5%',
+	// },
 	// {
 	// 	type: 'text',
 	// 	name: 'quantityAccum',
@@ -77,13 +94,7 @@ export const inputForms = [
 	// 	labelText: 'Количество лет создания капитала',
 	// 	disabled: true,
 	// },
-	{
-		type: 'text',
-		name: 'hardPercentInYear',
-		required: true,
-		className: 'storage',
-		labelText: '<p class="form-calc-text">Годовой сложный % в период создания капитала</p>',
-	},
+
 	// {
 	// 	type: 'text',
 	// 	name: 'percentMonth',
@@ -92,16 +103,4 @@ export const inputForms = [
 	// 	disabled: true,
 	// 	value: 0,
 	// },
-
-	{
-		type: 'text',
-		name: 'incomeTax',
-		className: 'pension',
-		required: true,
-		labelText: '<p class="form-calc-text">Налог на инвестиционный доход</p>',
-		// disabled: true,
-		// value: 0,
-	},
-	// TODO
-	// налог на инвестиционный доход  - вкл в формулу выхода на пенсию
 ]

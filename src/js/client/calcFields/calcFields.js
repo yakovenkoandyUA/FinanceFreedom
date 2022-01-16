@@ -71,7 +71,7 @@ export default class calcFields extends Graphic {
 	}
 
 	getPension() {
-		const { hardPercentInPension, incomeTax } = this.props
+		const { hardPercentInPension, incomeTax, pension } = this.props
 
 		if (
 			!(
@@ -84,31 +84,37 @@ export default class calcFields extends Graphic {
 			return
 		let percent = this.splitPercent(hardPercentInPension)
 		let incomeTaxPercent = this.splitPercent(incomeTax)
+		
 		let pensionMoney = [this.sum]
 		const emptyArr = new Array(this.quantityYear)
 		const calcPension = money => {
 			let balanceIncome = Math.floor(+money * percent)
 			let pensionInYear = +this.desiredIncomeInflation * 12
+			
 			let balance = +money + balanceIncome - pensionInYear
+     
 			if (balance <= 0) {
 				pensionMoney.push(0)
 				return
 			} else {
 				if (balanceIncome > pensionInYear) {
-					for (let i = 0; i <= 10; i++) {
+					let count = window.innerWidth < 768 ? 10 : 30
+					for (let i = 0; i <= count; i++) {
 						balanceIncome = Math.floor(+balance * percent)
 						pensionInYear = +this.desiredIncomeInflation * 12
-						balance = +balance + (balanceIncome - balanceIncome * incomeTaxPercent) - pensionInYear
-						// let diffBalanceTax = balance - balance * incomeTaxPercent
+						balance = +balance + balanceIncome - pensionInYear
+						let diffBalanceTax = balance - balance * incomeTaxPercent
 
-						pensionMoney.push(balance)
+						pensionMoney.push(diffBalanceTax)
 					}
 				} else {
-					pensionMoney.push(balance)
-					calcPension(balance)
+					let diffBalanceTax = balance - balance * incomeTaxPercent
+					pensionMoney.push(Math.floor(diffBalanceTax))
+					calcPension(diffBalanceTax)
 				}
 			}
 		}
+		// console.log(pensionMoney)
 		calcPension(this.sum)
 		this.pensionArr = emptyArr.concat(pensionMoney)
 	}

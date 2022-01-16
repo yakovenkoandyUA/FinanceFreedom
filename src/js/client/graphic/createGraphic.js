@@ -10,11 +10,8 @@ export default class Graphic {
 		if (!(startCreateCapital !== '' && pension !== '' && hardPercentInYear !== '')) return
 
 		this.label = []
-		let filterPension
-		if (this.pensionArr) {
-			filterPension = this.pensionArr.filter(item => item)
-		}
 		if (this.sum && this.pensionArr) {
+			let filterPension = this.pensionArr.filter(item => item)
 			let count = +pension + filterPension.length
 			for (let i = startCreateCapital; i <= count; i++) {
 				this.label.push(+i)
@@ -80,11 +77,12 @@ export default class Graphic {
 						anchor: 'end',
 						align: 'top',
 						offset: 2,
-						display: function (context) {
-							if (window.innerWidth < 768) {
-								return context.dataIndex % 2
-							}
-						},
+						// display: function (context) {
+						// 	if (window.innerWidth < 768) {
+						// 		return context.dataIndex % 2
+						// 	}
+						// },
+						display: false,
 						formatter: function (value, context) {
 							return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 						},
@@ -93,8 +91,8 @@ export default class Graphic {
 				responsive: true,
 				tooltips: {
 					mode: 'point',
-					intersect: false,
-					enabled: this.quantityYear > 15 ? true : false,
+					intersect: true,
+					enabled: true,
 					backgroundColor: 'rgb(0,0,0)',
 					titleFontSize: 14,
 					titleFontColor: '#fff',
@@ -112,8 +110,10 @@ export default class Graphic {
 							)
 							let index = tooltipItem['index']
 							let indexPension = data['datasets'][0]['data'].length
+							let strLabel = index >= indexPension ? 'Пассивный доход:' : 'Создание капитала:'
+
 							return (
-								'Создание капитала:' +
+								strLabel +
 								' ' +
 								'$' +
 								arr[index >= indexPension ? index + 1 : index]
@@ -149,7 +149,7 @@ export default class Graphic {
 					yAxes: [
 						{
 							ticks: {
-								display:  false,
+								display: false,
 								fontColor: '#969696',
 								padding: 8,
 								fontSize: 14,
@@ -181,6 +181,7 @@ export default class Graphic {
 								lineWidth: 1,
 								zeroLineColor: '#fff',
 								display: false,
+								max: 100,
 							},
 							ticks: {
 								fontColor: '#969696',

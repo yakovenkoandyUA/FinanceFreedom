@@ -31,6 +31,8 @@ export default class Input extends Component {
 	render() {
 		const { errorText, labelText, ...attr } = this.props;
 		const element = this.createElement('input', attr);
+
+
 		if (attr.required) {
 			element.addEventListener('focus', this.handleFocus);
 			element.addEventListener('blur', this.handleBlur);

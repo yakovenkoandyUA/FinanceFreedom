@@ -6,6 +6,15 @@ const formStorage = new CalculateForm({
 	autocomplete: 'off',
 	id: 'storage',
 }).render()
+
+
+
+
+
+
+
+
+
 const formPension = new CalculateForm({
 	className: 'form-calc',
 	autocomplete: 'off',
