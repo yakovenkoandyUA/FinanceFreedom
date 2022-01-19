@@ -28,15 +28,13 @@ export default class Graphic {
 		this.render()
 	}
 
-	generatePointColor = (totalAmount, flag = false) =>
-		totalAmount
-			? new Array(totalAmount.length).fill(flag ? 'rgba(19, 111, 98, 1)' : 'rgba(222, 145, 81, 1)')
-			: ''
+	generatePointColor = (totalAmount, flag = false) => (totalAmount ? new Array(totalAmount.length).fill(flag ? 'rgba(19, 111, 98, 1)' : 'rgba(222, 145, 81, 1)') : '')
 
 	render() {
 		let years = this.quantityYear
 		const pointsAcc = this.generatePointColor(this.summInYear, true)
 		const pointsPens = this.generatePointColor(this.pensionArr)
+		const that = this
 		myChart.destroy()
 		myChart = new Chart(ctx, {
 			type: 'line',
@@ -105,21 +103,18 @@ export default class Graphic {
 							return data['labels'][tooltipItem[0]['index']] + ' ' + 'Лет'
 						},
 						label: function (tooltipItem, data) {
-							let arr = [...data['datasets'][0]['data'], ...data['datasets'][1]['data']].filter(
-								i => i,
-							)
+							let arr = [...data['datasets'][0]['data'], ...data['datasets'][1]['data']].filter(i => i)
+							console.log(data)
 							let index = tooltipItem['index']
 							let indexPension = data['datasets'][0]['data'].length
-							let strLabel = index >= indexPension ? 'Пассивный доход:' : 'Создание капитала:'
-
-							return (
-								strLabel +
-								' ' +
-								'$' +
-								arr[index >= indexPension ? index + 1 : index]
-									.toString()
-									.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-							)
+							let strLabel = index >= indexPension ? 'Капитал :' : 'Создание капитала:'
+							let inflStr = that.inflationArr.filter(({ value, inflation }) => value === arr[index >= indexPension ? index + 1 : index])
+							
+							// if (inflStr[0] && data.datasets[0].data[data.datasets[0].data.length - 1] !== inflStr[0].value) {
+							// 	return `${strLabel} $${arr[index >= indexPension ? index + 1 : index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} \n Сумма инфляции: ${inflStr[0].inflation}`
+							// } else {
+								return `${strLabel} $${arr[index >= indexPension ? index + 1 : index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+							// }
 						},
 					},
 				},

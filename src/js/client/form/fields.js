@@ -1,6 +1,13 @@
 export const inputForms = [
 	{
 		type: 'text',
+		name: 'pension',
+		required: true,
+		className: 'pension',
+		labelText: '<p class="form-calc-text">Выход на пенсию, лет</p>',
+	},
+	{
+		type: 'text',
 		name: 'desiredIncome',
 		required: true,
 		className: 'pension',
@@ -23,14 +30,14 @@ export const inputForms = [
 		// value: 0,
 	},
 
-	{
-		type: 'text',
-		name: 'desiredIncomeInflation',
-		className: 'pension',
-		labelText: '<p class="form-calc-text">Пассивный доход с учетом инфляции 2.5%</p>',
-		disabled: true,
-		// value: 0,
-	},
+	// {
+	// 	type: 'text',
+	// 	name: 'desiredIncomeInflation',
+	// 	className: 'pension',
+	// 	labelText: '<p class="form-calc-text">Пассивный доход с учетом инфляции 2.5%</p>',
+	// 	disabled: true,
+	// 	// value: 0,
+	// },
 
 	{
 		type: 'text',
@@ -64,13 +71,7 @@ export const inputForms = [
 		className: 'storage',
 		labelText: '<p class="form-calc-text">Годовой сложный % в период создания капитала</p>',
 	},
-	{
-		type: 'text',
-		name: 'pension',
-		required: true,
-		className: 'storage',
-		labelText: '<p class="form-calc-text">Выход на пенсию, лет</p>',
-	},
+
 	// {
 	// 	type: 'text',
 	// 	name: 'percentMonthPension',

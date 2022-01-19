@@ -20,7 +20,7 @@ export default class Input extends Component {
 	generateChart(fields) {
 		const generateFields = new calcFilds(fields);
 		generateFields.setQuantityAccum();
-		generateFields.setDesiredIncomeInflation();
+		// generateFields.setDesiredIncomeInflation();
 		generateFields.setPercentMonth();
 		// generateFields.setPercentMonthPension();
 		generateFields.getSumm();
