@@ -35,7 +35,7 @@ module.exports = {
       publicPath: '/' - relative path for dist folder (js,css etc)
       publicPath: './' (dot before /) - absolute path for dist folder (js,css etc)
     */
-		publicPath: '/',
+		publicPath: './',
 	},
 	optimization: {
 		splitChunks: {

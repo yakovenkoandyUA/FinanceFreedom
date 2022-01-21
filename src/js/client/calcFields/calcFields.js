@@ -102,7 +102,7 @@ export default class calcFields extends Graphic {
 		const that = this
 		const calcPension = money => {
 			let balanceIncome = Math.floor(+money * percent)
-			let pensionInYear = (+that.desiredIncomeInflation + +that.desiredIncomeInflation * incomeTaxPercent) * 12
+			let pensionInYear = (+desiredIncome + +desiredIncome * incomeTaxPercent) * 12
 
 			let balance = +money + balanceIncome - pensionInYear
 
