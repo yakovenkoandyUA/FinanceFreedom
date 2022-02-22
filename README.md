@@ -20,9 +20,11 @@ npm install
 npm run dev
 
 # Output will be at dist/ folder
-npm run build
+npm run build:prod
 ```
 
+## Update Hosting:
+Для того чтобы обновить хостинг, нужно все папки(файлы) внутри папки build заархивировать и на сайте ukraine.com.ua через панель управления Хостинг -> Мои сайты -> файл-менеджер; загрузить архив в корень структуры рядом с папками "www" и "webinar". После чего разархивировать данный архив в папку "www".
 ## License
 
 [MIT](./LICENSE)

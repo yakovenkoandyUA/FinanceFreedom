@@ -1,24 +1,19 @@
-# Default
-.gulp
-.idea
-.vscode
+build
 
-# Node
+__MACOSX
+.Saved
+_arc
+bower_components
 node_modules
-
-# Dist & tests
-test
-dist
-
-# Logs:
+.vscode
+.publish
+.DS_Store
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Special
+*.sublime-*
+*.rar
+*.zip
+.idea
+yarn.lock
+package-lock.json
+ex_files
 Thumbs.db
-Desktop.ini
-.DS_Store*
-ehthumbs.db
-Icon?

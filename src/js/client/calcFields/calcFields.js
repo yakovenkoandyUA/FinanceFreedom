@@ -29,31 +29,7 @@ export default class calcFields extends Graphic {
 		if (!(hardPercentInYear !== '')) return
 		const value = (Math.pow(1 + percent, 1 / 12) - 1) * 100
 		this.fixValue = value.toFixed(2) + '%'
-		// this.assignValues('percentMonth', this.fixValue);
 	}
-
-	// setPercentMonthPension() {
-	// 	const { hardPercentInPension } = this.props;
-	// 	let percent = this.splitPercent(hardPercentInPension);
-	// 	if (!(hardPercentInPension !== '')) return;
-	// 	const value = (Math.pow(1 + percent, 1 / 12) - 1) * 100;
-	// 	const fixValue = value.toFixed(2) + '%';
-	// 	this.assignValues('percentMonthPension', fixValue);
-	// }
-
-	// setDesiredIncomeInflation() {
-	// 	const { desiredIncome } = this.props
-	// 	if (!(desiredIncome !== '' && this.quantityYear !== undefined)) return
-	// this.desiredIncomeInflation = (desiredIncome - desiredIncome * percent).toFixed(0)
-	// this.assignValues('desiredIncomeInflation', this.desiredIncomeInflation)
-	// }
-
-	// calcDesiredIncomeInflationInYear() {
-	// 	const { desiredIncome, startCreateCapital } = this.props
-	// 	if (!(desiredIncome !== '' && startCreateCapital !== '')) return
-	// 	let percent = this.splitPercent('2.5%')
-
-	// }
 
 	getSumm() {
 		const { contribution, addMonth, pension, hardPercentInYear } = this.props
@@ -81,7 +57,6 @@ export default class calcFields extends Graphic {
 				this.sum !== '' &&
 				hardPercentInPension !== '' &&
 				desiredIncome !== '' &&
-				// this.desiredIncomeInflation !== undefined &&
 				this.quantityYear !== undefined
 			)
 		)
@@ -95,10 +70,10 @@ export default class calcFields extends Graphic {
 		let percentInflation = this.splitPercent('2.5%')
 
 		this.desiredIncomeInflation = (+desiredIncome + +desiredIncome * percentInflation).toFixed(0)
-		// this.assignValues('desiredIncomeInflation', this.desiredIncomeInflation)
+
 
 		let infaltionMoney = [this.desiredIncomeInflation]
-		// let countYear = startCreateCapital
+
 		const that = this
 		const calcPension = money => {
 			let balanceIncome = Math.floor(+money * percent)
@@ -115,21 +90,16 @@ export default class calcFields extends Graphic {
 					for (let i = 0; i <= count; i++) {
 						that.desiredIncomeInflation = (+that.desiredIncomeInflation + +that.desiredIncomeInflation * percentInflation).toFixed(0)
 						infaltionMoney.push(that.desiredIncomeInflation)
-						// balanceIncome = Math.floor(+balance * percent)
-						// pensionInYear = +this.desiredIncomeInflation * 12
 						balance = +balance + balanceIncome - pensionInYear
-						// let diffBalanceTax = balance - balance * incomeTaxPercent
-
 						pensionMoney.push(balance)
 					}
 				} else {
-					let diffBalanceTax = balance - balance * incomeTaxPercent
+
 					pensionMoney.push(Math.floor(balance))
 					calcPension(balance)
 				}
 			}
 		}
-		// console.log(pensionMoney)
 		calcPension(this.sum)
 		this.inflationArr = pensionMoney.map((value, ind) => ({ value, inflation: infaltionMoney[ind] }))
 		this.pensionArr = emptyArr.concat(pensionMoney)

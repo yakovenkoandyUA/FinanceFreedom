@@ -7,20 +7,11 @@ const formStorage = new CalculateForm({
 	id: 'storage',
 }).render()
 
-
-
-
-
-
-
-
-
 const formPension = new CalculateForm({
 	className: 'form-calc',
 	autocomplete: 'off',
 	id: 'pension',
 }).render()
-// const graphic = new Graphic();
 
 window.addEventListener('DOMContentLoaded', () => {
 	document.querySelector('.title-s').after(formStorage)

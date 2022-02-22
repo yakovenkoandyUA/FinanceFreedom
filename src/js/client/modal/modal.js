@@ -30,21 +30,21 @@ export default class Modal {
            
             <div class="modal__item">
                 <div class="modal__item-head">
-                    <img class="modal__item-img" src="./assets/img/modal/mono.png" alt="monobank" width="32px">
+                    <img class="modal__item-img" src="./img/modal/mono.png" alt="monobank" width="32px">
                     <h3 class="modal__item-title">Карта Monobank:</h3>
                 </div>
                 <p class="modal__item-text">4441 1144 5435 1824</p>
             </div>
             <div class="modal__item">
                 <div class="modal__item-head">
-                    <img class="modal__item-img" src="./assets/img/modal/eth.png" alt="monobank" width="32px">
+                    <img class="modal__item-img" src="./img/modal/eth.png" alt="monobank" width="32px">
                     <h3 class="modal__item-title">Ethereum (ERC-20):</h3>
                 </div>
                 <p class="modal__item-text">0x0f441519a89af75162600fecf8744d09ac4be798</p>
             </div>
             <div class="modal__item">
                 <div class="modal__item-head">
-                    <img class="modal__item-img" src="./assets/img/modal/btc.png" alt="monobank" width="32px">
+                    <img class="modal__item-img" src="./img/modal/btc.png" alt="monobank" width="32px">
                     <h3 class="modal__item-title">Bitcoin:</h3>
                 </div>
                 <p class="modal__item-text">1PReRzM3MnncEy74f6BUhWjAtzRAnLqidf</p>

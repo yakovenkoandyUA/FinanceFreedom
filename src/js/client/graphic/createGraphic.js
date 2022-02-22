@@ -1,5 +1,5 @@
 import { Chart } from 'chart.js'
-import { options, ctx } from './myChart'
+import { ctx } from './myChart'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 
 let myChart = new Chart(ctx)
@@ -31,7 +31,6 @@ export default class Graphic {
 	generatePointColor = (totalAmount, flag = false) => (totalAmount ? new Array(totalAmount.length).fill(flag ? 'rgba(19, 111, 98, 1)' : 'rgba(222, 145, 81, 1)') : '')
 
 	render() {
-		let years = this.quantityYear
 		const pointsAcc = this.generatePointColor(this.summInYear, true)
 		const pointsPens = this.generatePointColor(this.pensionArr)
 		const that = this
@@ -40,7 +39,7 @@ export default class Graphic {
 			type: 'line',
 			data: {
 				labels: this.label,
-				// showLine: true,
+				
 				datasets: [
 					{
 						label: 'Создание капитала',
@@ -65,21 +64,9 @@ export default class Graphic {
 				plugins: {
 					datalabels: {
 						color: '#969696',
-						// labels: {
-						// 	title: {
-						// 		font: {
-						// 			weight: 'bold',
-						// 		},
-						// 	},
-						// },
 						anchor: 'end',
 						align: 'top',
 						offset: 2,
-						// display: function (context) {
-						// 	if (window.innerWidth < 768) {
-						// 		return context.dataIndex % 2
-						// 	}
-						// },
 						display: false,
 						formatter: function (value, context) {
 							return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -104,17 +91,11 @@ export default class Graphic {
 						},
 						label: function (tooltipItem, data) {
 							let arr = [...data['datasets'][0]['data'], ...data['datasets'][1]['data']].filter(i => i)
-							console.log(data)
 							let index = tooltipItem['index']
 							let indexPension = data['datasets'][0]['data'].length
 							let strLabel = index >= indexPension ? 'Капитал :' : 'Создание капитала:'
 							let inflStr = that.inflationArr.filter(({ value, inflation }) => value === arr[index >= indexPension ? index + 1 : index])
-							
-							// if (inflStr[0] && data.datasets[0].data[data.datasets[0].data.length - 1] !== inflStr[0].value) {
-							// 	return `${strLabel} $${arr[index >= indexPension ? index + 1 : index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} \n Сумма инфляции: ${inflStr[0].inflation}`
-							// } else {
 								return `${strLabel} $${arr[index >= indexPension ? index + 1 : index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
-							// }
 						},
 					},
 				},
@@ -141,7 +122,7 @@ export default class Graphic {
 				},
 				responsive: true,
 				scales: {
-					yAxes: [
+					y: [
 						{
 							ticks: {
 								display: false,
@@ -159,7 +140,6 @@ export default class Graphic {
 								display: true,
 								color: 'rgba(255,255,255, 0.3)',
 								lineWidth: 1,
-								// borderDash: [20, 5],
 								zeroLineColor: '#000',
 							},
 							labels: {
@@ -169,7 +149,7 @@ export default class Graphic {
 							},
 						},
 					],
-					xAxes: [
+					x: [
 						{
 							gridLines: {
 								color: 'rgba(255,255,255, 0.3)',

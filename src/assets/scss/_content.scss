@@ -14,13 +14,18 @@ body {
 	text-align: left;
 }
 
+.header {
+	&__title {
+		font-size: rem(28);
+		line-height: rem(42);
+	}
+}
+
 .logo {
 	width: 40%;
 }
 .title-s,
 .title-p {
-	// color: #d1d5d6;
-	// letter-spacing: 1.8px;
 	text-transform: uppercase;
 	font-size: rem(24);
 	line-height: rem(31);
@@ -73,7 +78,6 @@ body {
 	font-size: rem(21);
 	border-bottom: 1px solid $mainFontColor;
 	color: rgb(209, 213, 214);
-	// text-align: center;
 	background-color: transparent;
 	padding-bottom: 5px;
 	position: relative;
@@ -96,28 +100,6 @@ body {
 	border-color: #0c9200;
 	color: #0c9200;
 }
-
-// .form-calc label::after {
-// 	content: '';
-// 	position: absolute;
-// 	right: 20%;
-// 	bottom: 15px;
-// 	height: 100%;
-// 	width: 80px;
-// 	border-bottom: 2px solid #0c9200;
-// 	transition: right 0.3s ease, opacity 0.3s ease;
-// 	opacity: 0;
-// }
-
-// .form-calc label.active::after {
-// 	right: -37px;
-// 	opacity: 1;
-// }
-// .form-calc label:nth-last-child().active::after,
-// .form-calc label:nth-child(7).active::after {
-// 	right: -31px;
-// 	opacity: 1;
-// }
 
 .form-calc label input:disabled {
 	color: #f96800;
@@ -188,8 +170,6 @@ body {
 			font-size: rem(24);
 			line-height: rem(24);
 			color: #ffffff;
-
-			// max-width: 160px;
 		}
 		&-title:not(:last-child) {
 			margin-bottom: 0.5em;
@@ -200,9 +180,7 @@ body {
 		&-icon {
 			max-width: 70px;
 			margin-right: 1em;
-			// @media (max-width: 768px) {
-			// 	max-width: 90px;
-			// }
+
 			& path {
 				transition: 0.5s;
 			}
@@ -236,9 +214,6 @@ body {
 				width: 68px;
 				height: 50px;
 			}
-			// display: flex;
-			// justify-content: center;
-			// align-items: center;
 			transition: 0.5s;
 			
 			&:not(:last-child) {
@@ -274,8 +249,6 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	// opacity: 1;
-	// pointer-events: all;
 	opacity: 0;
 	pointer-events: none;
 	transition: 0.3s ease-in-out;
@@ -292,10 +265,7 @@ body {
 }
 
 .modal {
-	// width: 45%;
 	padding: 1em;
-	// display: flex;
-	// flex-direction: column;
 	border-radius: 1em;
 	background-color: #fff;
 	position: relative;
@@ -306,7 +276,6 @@ body {
 	top: 0.5em;
 	right: 0.5em;
 	cursor: pointer;
-	// align-self: flex-end;
 	font-size: rem(25);
 	background-color: transparent;
 	border: none;
@@ -332,9 +301,5 @@ body {
 	&-title {
 		font-size: rem(22);
 		font-weight: 700;
-	}
-	&-text {
-		// font-size: rem;
-		// letter-spacing: 1.1px;
 	}
 }
